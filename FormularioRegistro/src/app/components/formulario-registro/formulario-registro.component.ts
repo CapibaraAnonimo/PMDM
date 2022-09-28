@@ -8,6 +8,7 @@ import { MaterialImportsModule } from "../../material-imports/material-imports.m
 })
 
 export class FormularioRegistroComponent implements OnInit {
+
   value = 'Clear me';
 
   constructor() { }
