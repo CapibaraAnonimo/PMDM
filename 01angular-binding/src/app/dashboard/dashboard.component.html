@@ -1,0 +1,21 @@
+<!--Interpolación: hemos metidovariables desde el otro archivo usando el moustache {{}}-->
+<h1>Interpolación</h1>
+<h1>Hola {{ name }}!</h1>
+<div><img src="{{avatarUrl}}" width="300px"></div>
+<br><br>
+
+<!--Interpolación de propiedades: lo mismo pero usandolo en propiedades, eso se determina usando
+    corchetes rodeando la propiedad [src], por ejemplo-->
+<h1>Property Binding</h1>
+<div><img [src]="avatarUrl" width="300px"></div>
+
+<!--Event binding: pasas información del html al otro archivo-->
+<h1>Event binding</h1>
+<input type="button" value="Cambiar imagen" (click)="changeAvatar()"/>
+
+<!--Two way data binding: se hace lo mismo pero sin eventos usando Banan in a box [()]-->
+<h1>Two way data binding</h1>
+
+<label for="formname">Escribe un nombre</label>
+<input id="formname" type="text" [(ngModel)]="inputName">
+<p>El nombre escrito es: {{inputName}}</p>
