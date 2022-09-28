@@ -1,27 +1,3 @@
-/*import {Component} from '@angular/core';
-
-export interface columsToDisplay {
-  user: string;
-  age: number;
-}
-
-const ELEMENT_DATA: columsToDisplay[] = [
-  {user: 'User1', age: 18},
-  {user: 'User2', age: 18},
-  {user: 'User3', age: 18}
-]
-
-@Component({
-  selector: 'app-modules-mat',
-  templateUrl: './modules-mat.component.html',
-  styleUrls: ['./modules-mat.component.css']
-})
-export class TableMatComponent{
-  columsToDisplay: string[] = ['user', 'age']
-  myDataArray = ELEMENT_DATA;
-
-}*/
-
 import {Component, OnInit} from '@angular/core';
 
 export interface PeriodicElement {
