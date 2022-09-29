@@ -25,6 +25,9 @@ export class FormularioRegistroComponent implements OnInit {
   }
 
   mostrarInfo() {
-    this.visible = this.nombre != '' && this.apellidos != '' && this.nif != '' && this.email != '' && this.telefono != '' && this.sexo != '' && this.conocer != '';
+    if (this.nombre != '' && this.apellidos != '' && this.nif != '' && this.email != '' && this.telefono != '' && this.sexo != '' && this.conocer != '') {
+      console.log('Nombre: ', this.apellidos, this.nombre, 'Nif: ',
+        this.nif, 'Email: ', this.email, 'Teléfono: ', this.telefono, 'Sexo: ', this.sexo, 'Como conocistes la página: ', this.conocer);
+    }
   }
 }
