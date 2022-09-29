@@ -1,15 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { MaterialImportsModule } from "../../material-imports/material-imports.module";
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from "@angular/material/core";
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
-  selector: 'app-modules',
+  selector: 'app-formulario-registro',
   templateUrl: './formulario-registro.component.html',
   styleUrls: ['./formulario-registro.component.css']
 })
-
 export class FormularioRegistroComponent implements OnInit {
+  value = '';
 
-  value = 'Clear me';
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
+  matcher = new MyErrorStateMatcher();
 
   constructor() { }
 
