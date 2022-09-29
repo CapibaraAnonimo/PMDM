@@ -6,8 +6,11 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  user = "";
+  password = "";
   isVisible = false;
   type = 'password';
+  checked = false;
 
   constructor() {
   }
@@ -19,6 +22,8 @@ export class LoginComponent implements OnInit {
     this.isVisible = !this.isVisible;
     if (this.isVisible) {
       this.type = 'text';
+    } else {
+      this.type = 'password';
     }
   }
 }

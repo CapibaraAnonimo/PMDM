@@ -4,6 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialImportsModule} from "./modules/material-imports.module";
+import {FormsModule} from "@angular/forms";
 import {LoginComponent} from './login/login.component';
 
 @NgModule({
@@ -14,7 +15,8 @@ import {LoginComponent} from './login/login.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialImportsModule
+    MaterialImportsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

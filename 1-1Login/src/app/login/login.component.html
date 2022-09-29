@@ -1,13 +1,21 @@
 <mat-form-field appearance="fill">
   <mat-label>Usuario</mat-label>
-  <input matInput>
+  <input matInput [(ngModel)]="user">
 </mat-form-field>
 
 <br>
 
 <mat-form-field appearance="fill">
   <mat-label>Contraseña</mat-label>
-  <input matInput type={{type}}>
+  <input matInput type={{type}} [(ngModel)]="password">
   <mat-icon (click)="changeVisibility()" aria-label="Visibilidad"
             matSuffix>{{isVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
 </mat-form-field>
+
+<br>
+
+<mat-checkbox class="example-margin" [(ngModel)]="checked">Checked</mat-checkbox>
+
+<br>
+
+<button mat-raised-button [disabled]="user == '' || password == '' || !checked">Iniciar Sesión</button>
