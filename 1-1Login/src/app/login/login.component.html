@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill">
+  <mat-label>Usuario</mat-label>
+  <input matInput>
+</mat-form-field>
+
+<br>
+
+<mat-form-field appearance="fill">
+  <mat-label>Contraseña</mat-label>
+  <input matInput type={{type}}>
+  <mat-icon (click)="changeVisibility()" aria-label="Visibilidad"
+            matSuffix>{{isVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+</mat-form-field>
