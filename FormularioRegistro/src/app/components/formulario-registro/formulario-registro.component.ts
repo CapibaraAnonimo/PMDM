@@ -1,13 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from "@angular/material/core";
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-formulario-registro',
@@ -15,15 +6,25 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./formulario-registro.component.css']
 })
 export class FormularioRegistroComponent implements OnInit {
-  value = '';
+  nombre = "";
+  apellidos = '';
+  nif = '';
+  email = '';
+  telefono = '';
+  sexo = '';
+  sexoOpciones = ['Masculino', 'Femenino'];
+  conocer = '';
+  conocerOpciones = ['Buscando en google', 'A través de un amigo', 'Por un exVendedor de seguros'];
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  visible = false;
 
-  matcher = new MyErrorStateMatcher();
-
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  mostrarInfo() {
+    this.visible = this.nombre != '' && this.apellidos != '' && this.nif != '' && this.email != '' && this.telefono != '' && this.sexo != '' && this.conocer != '';
+  }
 }
