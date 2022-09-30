@@ -1,5 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatAccordion} from "@angular/material/expansion";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-desplegable',
@@ -7,7 +6,6 @@ import {MatAccordion} from "@angular/material/expansion";
   styleUrls: ['./desplegable.component.css']
 })
 export class DesplegableComponent implements OnInit {
-  panelOpenState = false;
 
   constructor() {
   }
