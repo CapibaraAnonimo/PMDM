@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 export interface Alumno {
   id: number;
@@ -23,13 +23,19 @@ const ELEMENT_DATA: Alumno[] = [
 export class TablaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'fechaNacimiento', 'curso', 'acciones'];
   dataSource = ELEMENT_DATA;
+  idCheck = true;
+  nombreCheck = true;
+  apellidosCheck = true;
+  fechaCheck = true;
+  cursoCheck =true;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-  delete(element:number) {
-    this.dataSource = this.dataSource.filter((u) => u.id !==element);
+  delete(element: number) {
+    this.dataSource = this.dataSource.filter((u) => u.id !== element);
   }
 }
