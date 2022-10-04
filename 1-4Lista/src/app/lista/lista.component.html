@@ -1,0 +1,8 @@
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter()" placeholder="Ex. ium" #input [(ngModel)]="busqueda">
+</mat-form-field>
+
+<div *ngFor="let alimento of listaAlimentos; let i = index">
+  {{i+1}}. {{alimento}}
+</div>
