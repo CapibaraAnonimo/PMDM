@@ -1,7 +1,13 @@
 <p>Listado facil de Pokémon</p>
 
 <ul>
-  <li *ngFor="listadoPokemon">
-    <p>{{listadoPokemon.nombre}}</p>
+  <li *ngFor="let poke of listadoPokemon">
+    <p>{{poke.name}}</p>
   </li>
 </ul>
+
+<p>Otra cosa</p>
+
+<p>{{pokemon2}}</p>
+
+<img src="{{pokemon}}">
