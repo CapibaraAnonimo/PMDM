@@ -1,23 +1,15 @@
-<!--
-<ul>
-  <li *ngFor="let poke of listadoPokemon">
-    <p>{{poke.name}}</p>
-  </li>
-</ul>
--->
-
-<mat-card class="example-card">
-  <mat-card-title style="text-transform: capitalize">&nbsp;&nbsp;&nbsp;&nbsp;{{pokemon.name}}</mat-card-title>
-  <mat-card-subtitle>#{{pokemon.id}}</mat-card-subtitle>
-  <img src="{{pokemon.sprites.other['official-artwork'].front_default}}" alt="{{pokemon.name}}-image" width="400px">
-  <mat-card-content>
-    <p>This card has divider and indeterminate progress as footer</p>
-    <p></p>
-  </mat-card-content>
-  <mat-divider inset></mat-divider>
-  <mat-card-actions>
-    <div *ngFor="let tipo of pokemon.types" style="border: 12px, solid, black">
-      {{tipo.type.name}}
-    </div>
-  </mat-card-actions>
-</mat-card>
+<div style="width: auto ;display: flex; flex-direction: row; flex-wrap: wrap">
+  <mat-card class="example-card" *ngFor="let poke of listadoPokemon" style="margin: 20px">
+    <mat-card-title style="text-transform: capitalize">&nbsp;&nbsp;&nbsp;&nbsp;{{poke.name}}</mat-card-title>
+    <mat-card-subtitle>#{{poke.pokemon.id}}</mat-card-subtitle>
+    <img src="{{poke.pokemon.sprites.other['official-artwork'].front_default}}" alt="{{poke.name}}-image" width="400px">
+    <mat-card-content>
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+      <div *ngFor="let tipo of poke.pokemon.types">
+        {{tipo.type.name}}
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
