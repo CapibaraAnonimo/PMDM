@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {InfoGeneral} from "../interfaces/pokemon-response.interface";
 import {PokemonResponse} from "../interfaces/pokemon-response.interface";
 
-const API_BASE_URL = 'https://pokeapi.co/api/v2'
+  const API_BASE_URL = 'https://pokeapi.co/api/v2'
 
 @Injectable({
   providedIn: 'root'
