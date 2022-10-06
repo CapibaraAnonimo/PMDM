@@ -19,6 +19,6 @@ export class PokeApiService {
   }
 
   public getPokemon(id: string): Observable<InfoGeneral>{
-    return this.http.get<InfoGeneral>(`${API_BASE_URL}/pokemon${id}`);
+    return this.http.get<InfoGeneral>(`${API_BASE_URL}/pokemon/${id}`);
   }
 }

@@ -10,7 +10,7 @@ import {InfoGeneral, Result} from "../interfaces/pokemon-response.interface";
 })
 export class PokemonsComponent implements OnInit {
   listadoPokemon: Result[] = [];
-  pokemon: InfoGeneral = {} as InfoGeneral;
+  pokemon: any;
   pokemon2 = '';
 
   constructor(private pokemonService: PokeApiService) {
@@ -21,9 +21,8 @@ export class PokemonsComponent implements OnInit {
       this.listadoPokemon = response.results;
     })
     this.pokemonService.getPokemon('4').subscribe(response => {
-      this.pokemon2 = response.name;
+      this.pokemon = response;
     })
-    this.getPokemon('4');
   }
 
   getPokemon(id: string): void {
