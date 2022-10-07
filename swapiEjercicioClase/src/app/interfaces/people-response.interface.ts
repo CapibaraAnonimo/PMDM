@@ -1,3 +1,6 @@
+import {Film} from "./films-response.interface";
+import {World} from "./worlds-response.interface";
+
 export interface Person {
   name: string;
   height: string;
@@ -15,6 +18,8 @@ export interface Person {
   created: Date;
   edited: Date;
   url: string;
+  filmsObjects: Film[];
+  homeworldObject: World;
 }
 
 export interface PeopleResponse {

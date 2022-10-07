@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Person} from "../interfaces/people-response.interface";
 import {PeopleService} from "../services/people.service";
-import {Film} from "../interfaces/films-response.interface";
 
 @Component({
   selector: 'app-people-list',
@@ -10,24 +9,36 @@ import {Film} from "../interfaces/films-response.interface";
 })
 export class PeopleListComponent implements OnInit {
   peopleList: Person[] = [];
-  filmList: Film[] = [];
+  terminado = false
 
   constructor(private peopleService: PeopleService) {
   }
 
   ngOnInit(): void {
     this.peopleService.peopleList().subscribe(response => {
-      this.peopleList = response.results
-    })
-    this.peopleService.filmList().subscribe(response => {
-      this.filmList = response.results;
+      this.peopleList = response.results;
+      this.peopleList.forEach(person => {
+        person.filmsObjects = [];
+        person.films.forEach(film => {
+          this.peopleService.getFilmByUrl(film).subscribe(filmResponse => {
+            person.filmsObjects.push(filmResponse);
+          })
+        })
+        this.peopleService.getWorldByURL(person.homeworld).subscribe(worldResponse => {
+          person.homeworldObject = worldResponse;
+        })
+      })
     })
   }
 
-  pertenencia(film: Film, films: string[]) {
-    if (films.includes(film.url))
-      return true;
-    else
-      return false;
+
+  getImageURL(person: Person) {
+    let baseUrlImage = 'https://starwars-visualguide.com/assets/img/characters/';
+    let num = '';
+    if (person.url.charAt(person.url.length - 3) != '/') {
+      num = person.url.charAt(person.url.length - 3)
+    }
+    num = num + person.url.charAt(person.url.length - 2)
+    return baseUrlImage + num + '.jpg'
   }
 }

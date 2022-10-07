@@ -1,10 +1,19 @@
-<ul>
-  <li *ngFor="let person of peopleList">
-    <p>{{person.name}}</p>
-    <ul>
-      <li *ngFor="let film of filmList">
-        <p *ngIf="pertenencia(film, person.films)">{{film.title}}</p>
-      </li>
-    </ul>
-  </li>
-</ul>
+<h1 *ngIf="!terminado">Sigue cargando</h1>
+
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+  <mat-card class="example-card" style="margin: 20px" *ngFor="let person of peopleList">
+    <mat-card-header>
+      <mat-card-title>{{person.name}}</mat-card-title>
+      <mat-card-subtitle>From {{person.homeworldObject.name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img src="{{getImageURL(person)}}" alt="{{person.name}}">
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <ul>
+        <li *ngFor="let film of person.filmsObjects">
+          <p>{{film.title}}</p>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
