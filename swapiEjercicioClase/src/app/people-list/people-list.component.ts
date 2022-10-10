@@ -9,7 +9,6 @@ import {PeopleService} from "../services/people.service";
 })
 export class PeopleListComponent implements OnInit {
   peopleList: Person[] = [];
-  terminado = false
 
   constructor(private peopleService: PeopleService) {
   }
