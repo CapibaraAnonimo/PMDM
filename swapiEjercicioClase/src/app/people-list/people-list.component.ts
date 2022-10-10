@@ -14,7 +14,7 @@ export class PeopleListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.peopleService.peopleList().subscribe(response => {
+    /*this.peopleService.peopleList().subscribe(response => {
       this.peopleList = response.results;
       this.peopleList.forEach(person => {
         person.filmsObjects = [];
@@ -27,6 +27,9 @@ export class PeopleListComponent implements OnInit {
           person.homeworldObject = worldResponse;
         })
       })
+    })*/
+    this.peopleService.speciesList(1).subscribe(response => {
+
     })
   }
 

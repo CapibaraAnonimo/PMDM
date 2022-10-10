@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {PeopleResponse, Person} from "../interfaces/people-response.interface";
 import {Film, FilmsResponse} from "../interfaces/films-response.interface";
 import {World} from "../interfaces/worlds-response.interface";
+import {SpeciesResponse} from "../interfaces/species-response.interface";
 
 const API_BASE_URL = 'https://swapi.dev/api'
 
@@ -33,5 +34,9 @@ export class PeopleService {
 
   public getWorldByURL(url: string): Observable<World>{
     return this.http.get<World>(url);
+  }
+
+  public speciesList(page: number): Observable<SpeciesResponse>{
+    return this.http.get<SpeciesResponse>(`${API_BASE_URL}/species?page${page}`)
   }
 }
