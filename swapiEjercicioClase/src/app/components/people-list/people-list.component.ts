@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Person} from "../interfaces/people-response.interface";
-import {PeopleService} from "../services/people.service";
-import {Specie} from "../interfaces/species-response.interface";
+import {Person} from "../../interfaces/people-response.interface";
+import {PeopleService} from "../../services/people.service";
+import {Specie} from "../../interfaces/species-response.interface";
 
 @Component({
   selector: 'app-people-list',
@@ -18,7 +18,7 @@ export class PeopleListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*this.peopleService.peopleList().subscribe(response => {
+    this.peopleService.peopleList().subscribe(response => {
       this.peopleList = response.results;
       this.peopleList.forEach(person => {
         person.filmsObjects = [];
@@ -31,7 +31,7 @@ export class PeopleListComponent implements OnInit {
           person.homeworldObject = worldResponse;
         })
       })
-    })*/
+    })
     this.peopleService.speciesList(1).subscribe(response => {
       this.speciesList = response.results;
       this.loadedPage = 1;
