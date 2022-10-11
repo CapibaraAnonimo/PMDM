@@ -15,3 +15,11 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<button mat-raised-button>
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)="changePage(loadedPage-1)">navigate_before</mat-icon>
+</button>
+<button mat-raised-button *ngFor="let i of pages" (click)="changePage(i)">{{i}}</button>
+<button mat-raised-button>
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)="changePage(loadedPage+1)">navigate_next</mat-icon>
+</button>

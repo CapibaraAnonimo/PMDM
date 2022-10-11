@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {PeopleService} from "../../services/people.service";
-import {Person} from "../../interfaces/people-response.interface";
 import {Specie} from "../../interfaces/species-response.interface";
 
 @Component({
@@ -9,12 +8,14 @@ import {Specie} from "../../interfaces/species-response.interface";
   styleUrls: ['./species-list.component.css']
 })
 export class SpeciesListComponent implements OnInit {
-  peopleList: Person[] = [];
   speciesList: Specie[] = [];
   pages: number[] = [];
   loadedPage = 0;
 
   constructor(private peopleService: PeopleService) {
+  }
+
+  ngOnInit(): void {
     this.peopleService.speciesList(1).subscribe(response => {
       this.speciesList = response.results;
       this.loadedPage = 1;
@@ -23,9 +24,6 @@ export class SpeciesListComponent implements OnInit {
         this.pages.push(i);
       }
     })
-  }
-
-  ngOnInit(): void {
   }
 
   changePage(page: number) {
