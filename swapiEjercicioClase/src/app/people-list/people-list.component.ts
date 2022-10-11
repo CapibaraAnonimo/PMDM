@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Person} from "../interfaces/people-response.interface";
 import {PeopleService} from "../services/people.service";
+import {Specie} from "../interfaces/species-response.interface";
 
 @Component({
   selector: 'app-people-list',
@@ -9,6 +10,9 @@ import {PeopleService} from "../services/people.service";
 })
 export class PeopleListComponent implements OnInit {
   peopleList: Person[] = [];
+  speciesList: Specie[] = [];
+  pages: number[] = [];
+  loadedPage = 0;
 
   constructor(private peopleService: PeopleService) {
   }
@@ -29,10 +33,14 @@ export class PeopleListComponent implements OnInit {
       })
     })*/
     this.peopleService.speciesList(1).subscribe(response => {
-
+      this.speciesList = response.results;
+      this.loadedPage = 1;
+      let number = Math.floor(response.count / 10) + 1;
+      for (let i = 1; i <= number; i++) {
+        this.pages.push(i);
+      }
     })
   }
-
 
   getImageURL(person: Person) {
     let baseUrlImage = 'https://starwars-visualguide.com/assets/img/characters/';
@@ -42,5 +50,15 @@ export class PeopleListComponent implements OnInit {
     }
     num = num + person.url.charAt(person.url.length - 2)
     return baseUrlImage + num + '.jpg'
+  }
+
+  changePage(page: number) {
+    if (page > 0 && page < this.pages.length + 1) {
+      this.peopleService.speciesList(page).subscribe(response => {
+        this.speciesList = []
+        this.speciesList = response.results;
+        this.loadedPage = page;
+      })
+    }
   }
 }

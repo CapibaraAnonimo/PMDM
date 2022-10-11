@@ -37,6 +37,10 @@ export class PeopleService {
   }
 
   public speciesList(page: number): Observable<SpeciesResponse>{
-    return this.http.get<SpeciesResponse>(`${API_BASE_URL}/species?page${page}`)
+    return this.http.get<SpeciesResponse>(`${API_BASE_URL}/species?page=${page}`)
+  }
+
+  public speciesListByURL(url: string): Observable<SpeciesResponse>{
+    return this.http.get<SpeciesResponse>(`${API_BASE_URL}/species?page=${url}`)
   }
 }

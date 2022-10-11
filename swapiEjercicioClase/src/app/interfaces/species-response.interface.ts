@@ -1,3 +1,5 @@
+import {World} from "./worlds-response.interface";
+
 export interface Specie {
   name: string;
   classification: string;
@@ -14,6 +16,7 @@ export interface Specie {
   created: Date;
   edited: Date;
   url: string;
+  homeworldObject: World;
 }
 
 export interface SpeciesResponse {
