@@ -9,13 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import {AppRoutingModule} from "./app-routing.module";
 import { InicioComponent } from './components/inicio/inicio.component';
 import { SpeciesListComponent } from './components/species-list/species-list.component';
+import { PersonDetailsComponent } from './components/person-details/person-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PeopleListComponent,
     InicioComponent,
-    SpeciesListComponent
+    SpeciesListComponent,
+    PersonDetailsComponent
   ],
   imports: [
     BrowserModule,

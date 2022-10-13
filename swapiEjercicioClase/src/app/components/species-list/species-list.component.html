@@ -1,3 +1,15 @@
+<button mat-raised-button>
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)="changePage(loadedPage-1)">
+    navigate_before
+  </mat-icon>
+</button>
+<button mat-raised-button *ngFor="let i of pages" (click)="changePage(i)">{{i}}</button>
+<button mat-raised-button>
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)="changePage(loadedPage+1)">
+    navigate_next
+  </mat-icon>
+</button>
+
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
   <mat-card class="example-card" style="margin: 20px" *ngFor="let specie of speciesList">
     <mat-card-header>
@@ -14,9 +26,13 @@
 </div>
 
 <button mat-raised-button>
-  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)="changePage(loadedPage-1)">navigate_before</mat-icon>
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)="changePage(loadedPage-1)">
+    navigate_before
+  </mat-icon>
 </button>
 <button mat-raised-button *ngFor="let i of pages" (click)="changePage(i)">{{i}}</button>
 <button mat-raised-button>
-  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)="changePage(loadedPage+1)">navigate_next</mat-icon>
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)="changePage(loadedPage+1)">
+    navigate_next
+  </mat-icon>
 </button>
