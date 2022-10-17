@@ -1,4 +1,8 @@
-Buenas
-<mat-select>
-  <mat-option [value]="pokemon.name" *ngFor="let pokemon of pokemons">{{pokemon.name}}</mat-option>
-</mat-select>
+<mat-form-field appearance="fill">
+  <mat-label>Pokemon</mat-label>
+  <mat-select [(ngModel)]="opcion" (selectionChange)="getPokemon()">
+    <mat-option [value]="poke" *ngFor="let poke of pokemons">{{poke.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<img src="{{pokemon.sprites.other['official-artwork'].front_default}}" *ngIf="opcion !=null" alt="{{pokemon.name}}-image">

@@ -9,12 +9,20 @@ import {PokemonURL} from "../../interfaces/pokemon.interface";
 })
 export class SelectPokemonComponent implements OnInit {
   pokemons: PokemonURL[] = [];
+  opcion: any;
+  pokemon: any;
 
   constructor(private pokemonservice: PokemonService) { }
 
   ngOnInit(): void {
     this.pokemonservice.getPokemons().subscribe(response => {
       this.pokemons = response.results;
+    })
+  }
+
+  getPokemon(){
+    this.pokemonservice.getPokemonByURL(this.opcion.url).subscribe(response => {
+      this.pokemon = response;
     })
   }
 
