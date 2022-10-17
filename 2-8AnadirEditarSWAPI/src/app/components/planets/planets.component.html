@@ -1,0 +1,44 @@
+<a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" class="navigation">arrow_back</mat-icon>
+</a>
+<a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" class="navigation">home</mat-icon>
+</a>
+
+<div class="contenido">
+  <button mat-raised-button (click)="getPage(currentPage - 1)">
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">navigate_before</mat-icon>
+  </button>&nbsp;
+  <div *ngFor="let in of counter(); let i = index">
+    <button mat-raised-button (click)="getPage(i + 1)">{{ i + 1 }}</button>&nbsp;
+  </div>
+  <button mat-raised-button (click)="getPage(currentPage + 1)">
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">navigate_next</mat-icon>
+  </button>&nbsp;
+</div>
+
+<div class="contenido">
+  <a routerLink="{{ getIdPlanet(item) }}" routerLinkActive="active" ariaCurrentWhenActive="page"
+     *ngFor="let item of planetList; let i = index">
+    <mat-card class="example-card">
+      <mat-card-header class="cont">
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ item.name }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="saveImg(item)"
+           onerror="this.src='https://starwars-visualguide.com/assets/img/placeholder.jpg'" alt="imagen" class="img"/>
+    </mat-card>
+  </a>
+</div>
+
+<div class="contenido">
+  <button mat-raised-button (click)="getPage(currentPage - 1)">
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">navigate_before</mat-icon>
+  </button>&nbsp;
+  <div *ngFor="let in of counter(); let i = index">
+    <button mat-raised-button (click)="getPage(i + 1)">{{ i + 1 }}</button>&nbsp;
+  </div>
+  <button mat-raised-button (click)="getPage(currentPage + 1)">
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">navigate_next</mat-icon>
+  </button>&nbsp;
+</div>

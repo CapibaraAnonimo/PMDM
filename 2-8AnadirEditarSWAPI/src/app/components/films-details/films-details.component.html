@@ -1,0 +1,23 @@
+<a routerLink="/films" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">arrow_back</mat-icon>
+</a>
+<a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">home</mat-icon>
+</a>
+
+<div class="anchuraGeneral">
+  <mat-card class="example-card">
+    <mat-card-header class="cont" style="justify-content: center">
+      <mat-card-title>{{ film.title }}</mat-card-title>
+    </mat-card-header>
+    <div class="contenedorGeneral">
+      <img [src]="saveImg(film)" alt="imagen" class="img"/>
+      <div class="info">
+        <div>Estreno: {{film.release_date}}</div>
+        <div>Director: {{film.director}}</div>
+        <div>Productor: {{film.producer}}</div>
+        <div>Texto Inicial: {{film.opening_crawl}}</div>
+      </div>
+    </div>
+  </mat-card>
+</div>

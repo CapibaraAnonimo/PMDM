@@ -1,0 +1,23 @@
+<a routerLink="/species" routerLinkActive="active" ariaCurrentWhenActive="page">
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">arrow_back</mat-icon>
+  </a>
+  <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">home</mat-icon>
+  </a>
+  
+  <div class="anchuraGeneral">
+    <mat-card class="example-card">
+      <mat-card-header class="cont" style="justify-content: center">
+        <mat-card-title>{{ specie.name }}</mat-card-title>
+      </mat-card-header>
+      <div class="contenedorGeneral">
+        <img [src]="saveImg(specie)" alt="imagen" class="img"/>
+        <div class="info">
+          <div>Clasificación: {{specie.classification}}</div>
+          <div>Designación: {{specie.designation}}</div>
+          <div>Lenguaje: {{specie.language}}</div>
+          <div>Color de piel: {{specie.skin_colors}}</div>
+        </div>
+      </div>
+    </mat-card>
+  </div>

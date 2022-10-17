@@ -1,0 +1,25 @@
+<a routerLink="/planets" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">arrow_back</mat-icon>
+</a>
+<a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">home</mat-icon>
+</a>
+
+<div class="anchuraGeneral">
+  <mat-card class="example-card">
+    <mat-card-header class="cont" style="justify-content: center">
+      <mat-card-title>{{ planet.name }}</mat-card-title>
+    </mat-card-header>
+    <div class="contenedorGeneral">
+      <img [src]="saveImg(planet)" onerror="this.src='https://starwars-visualguide.com/assets/img/placeholder.jpg'"
+           alt="imagen" class="img"/>
+      <div class="info">
+        <div>Clima: {{planet.climate}}</div>
+        <div>Gravedad: {{planet.gravity}}</div>
+        <div>Población: {{planet.population}}</div>
+        <div>Terreno: {{planet.terrain}}</div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+

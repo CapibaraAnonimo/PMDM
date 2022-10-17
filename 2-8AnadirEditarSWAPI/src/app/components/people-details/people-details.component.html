@@ -1,0 +1,23 @@
+<a routerLink="/people" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">arrow_back</mat-icon>
+</a>
+<a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">home</mat-icon>
+</a>
+
+<div class="anchuraGeneral">
+  <mat-card class="example-card">
+    <mat-card-header class="cont" style="justify-content: center">
+      <mat-card-title>{{ person.name }}</mat-card-title>
+    </mat-card-header>
+    <div class="contenedorGeneral">
+      <img [src]="saveImg(person)" alt="imagen" class="img"/>
+      <div class="info">
+        <div>Año de nacimiento: {{person.birth_year}}</div>
+        <div>Género: {{person.gender}}</div>
+        <div>Altura: {{person.height}}cm</div>
+        <div>Masa: {{person.mass}}kg</div>
+      </div>
+    </div>
+  </mat-card>
+</div>

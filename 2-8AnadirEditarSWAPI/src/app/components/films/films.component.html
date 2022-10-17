@@ -1,0 +1,18 @@
+<a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">arrow_back</mat-icon>
+</a>
+<a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">home</mat-icon>
+</a>
+
+<div class="contenido">
+  <a routerLink="{{i+1}}" routerLinkActive="active" ariaCurrentWhenActive="page"  *ngFor="let item of filmList; let i = index">
+    <mat-card class="example-card">
+      <mat-card-header class="cont">
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ item.title }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="saveImg(item)" alt="imagen" class="img" />
+    </mat-card>
+  </a>
+</div>

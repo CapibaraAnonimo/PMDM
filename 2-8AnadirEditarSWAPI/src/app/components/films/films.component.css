@@ -1,0 +1,23 @@
+.contenido{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+}
+
+.mat-icon {
+  color: yellow;
+  font-size: 50px;
+  width: auto;
+  height: auto;
+  margin: 15px;
+}
+
+.example-card {
+  max-width: 300px;
+  display: inline-block;
+  margin: 10px;
+  color: yellow;
+  background-color: black;
+}
