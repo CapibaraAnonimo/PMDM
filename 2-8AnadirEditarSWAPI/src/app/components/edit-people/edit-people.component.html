@@ -8,26 +8,26 @@
 <form [formGroup]="grupo">
 
   <label for="name" class="formLabel">Name: </label>
-  <input id="name" type="text" formControlName="name">
+  <input id="name" type="text" formControlName="name" required>
 
   <label for="height" class="formLabel">Height: </label>
-  <input id="height" type="text" formControlName="height">
+  <input id="height" type="text" formControlName="height" required>
 
   <label for="mass" class="formLabel">Mass: </label>
-  <input id="mass" type="text" formControlName="mass">
+  <input id="mass" type="text" formControlName="mass" required>
 
   <label for="hair_color" class="formLabel">Hair color: </label>
-  <input id="hair_color" type="text" formControlName="hair_color">
+  <input id="hair_color" type="text" formControlName="hair_color" required>
 
   <label for="skin_color" class="formLabel">Skin color: </label>
-  <input id="skin_color" type="text" formControlName="skin_color">
+  <input id="skin_color" type="text" formControlName="skin_color" required>
 
   <label for="eye_color" class="formLabel">Eye color: </label>
-  <input id="eye_color" type="text" formControlName="eye_color">
+  <input id="eye_color" type="text" formControlName="eye_color" required>
 
   <label for="birth_year" class="formLabel">Birth year: </label>
-  <input id="birth_year" type="text" formControlName="birth_year">
+  <input id="birth_year" type="text" formControlName="birth_year" required>
 
-  <button type="button" (click)="actualizarDatos()">Send</button>
+  <button type="button" [disabled]="!grupo.valid" required (click)="actualizarDatos()">Send</button>
 
 </form>
