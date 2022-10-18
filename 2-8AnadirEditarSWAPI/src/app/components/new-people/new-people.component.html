@@ -1,0 +1,34 @@
+<a routerLink="/people" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">arrow_back</mat-icon>
+</a>
+<a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">home</mat-icon>
+</a>
+
+<form [formGroup]="grupo">
+
+  <label for="name" class="formLabel">Name: </label>
+  <input id="name" type="text" formControlName="name" required>
+
+  <label for="height" class="formLabel">Height: </label>
+  <input id="height" type="text" formControlName="height" required>
+
+  <label for="mass" class="formLabel">Mass: </label>
+  <input id="mass" type="text" formControlName="mass" required>
+
+  <label for="hair_color" class="formLabel">Hair color: </label>
+  <input id="hair_color" type="text" formControlName="hair_color" required>
+
+  <label for="skin_color" class="formLabel">Skin color: </label>
+  <input id="skin_color" type="text" formControlName="skin_color" required>
+
+  <label for="eye_color" class="formLabel">Eye color: </label>
+  <input id="eye_color" type="text" formControlName="eye_color" required>
+
+  <label for="birth_year" class="formLabel">Birth year: </label>
+  <input id="birth_year" type="text" formControlName="birth_year" required>
+
+  <button type="submit" [disabled]="!grupo.valid" (click)="actualizarDatos()">Send</button>
+
+</form>
+

@@ -21,6 +21,9 @@ import { PlanetsDetailsComponent } from './components/planets-details/planets-de
 import { PeopleDetailsComponent } from './components/people-details/people-details.component';
 import { StarshipsDetailsComponent } from './components/starships-details/starships-details.component';
 import { VehiclesDetailsComponent } from './components/vehicles-details/vehicles-details.component';
+import { EditPeopleComponent } from './components/edit-people/edit-people.component';
+import { NewPeopleComponent } from './components/new-people/new-people.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { VehiclesDetailsComponent } from './components/vehicles-details/vehicles
     FilmsDetailsComponent,
     PeopleDetailsComponent,
     StarshipsDetailsComponent,
-    VehiclesDetailsComponent
+    VehiclesDetailsComponent,
+    EditPeopleComponent,
+    NewPeopleComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,8 @@ import { VehiclesDetailsComponent } from './components/vehicles-details/vehicles
     HttpClientModule,
     MaterialImportsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
