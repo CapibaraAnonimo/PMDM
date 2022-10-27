@@ -1,0 +1,32 @@
+<div fxLayoutAlign="center">
+  <button mat-raised-button>
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">first_page</mat-icon>
+  </button>
+  <button mat-raised-button (click)="changePage(page-1)">
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">navigate_before</mat-icon>
+  </button>
+  <button mat-raised-button *ngIf="page >1" (click)="changePage(page-1)">{{page - 1}}</button>
+  <button mat-raised-button>{{page}}</button>
+  <button mat-raised-button *ngIf="page<500" (click)="changePage(page+1)">{{page + 1}}</button>
+  <button mat-raised-button (click)="changePage(page+1)">
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">navigate_next</mat-icon>
+  </button>
+  <button mat-raised-button>
+    <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon">last_page</mat-icon>
+  </button>
+</div>
+
+<div fxLayout="row wrap" fxLayoutAlign="space-evenly  center">
+  <div *ngFor="let actor of actors"
+       style="width: 350px; height: 1000px; margin: 40px; background-color: bisque; padding: 20px; border-radius: 20px"
+       fxLayout="column">
+    {{actor.name}}
+    <img src="https://image.tmdb.org/t/p/original/{{actor.profile_path}}" alt="{{actor.name}} image">
+    <div style="overflow-y: scroll">
+      <h3>Known For:</h3>
+      <div *ngFor="let film of actor.known_for">
+        <img src="https://image.tmdb.org/t/p/original/{{film.poster_path}}" alt="{{film.name}} image" width="293px">
+      </div>
+    </div>
+  </div>
+</div>
