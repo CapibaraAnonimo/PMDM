@@ -8,11 +8,13 @@ import {MaterialImportsModule} from "./modules/material-imports.module";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { ActorsDialogComponent } from './components/actors-dialog/actors-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ActorsListComponent
+    ActorsListComponent,
+    ActorsDialogComponent
   ],
   imports: [
     BrowserModule,

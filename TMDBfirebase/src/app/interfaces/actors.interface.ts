@@ -36,3 +36,20 @@ export interface ActorsResponse {
   total_pages: number;
   total_results: number;
 }
+
+export interface ActorDetailsResponse {
+  adult: boolean;
+  also_known_as: any[];
+  biography: string;
+  birthday?: any;
+  deathday?: any;
+  gender: number;
+  homepage?: any;
+  id: number;
+  imdb_id: string;
+  known_for_department: string;
+  name: string;
+  place_of_birth?: any;
+  popularity: number;
+  profile_path?: any;
+}

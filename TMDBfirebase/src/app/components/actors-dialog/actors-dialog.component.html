@@ -1,0 +1,14 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <h1>{{actorDetail.name}}</h1>
+  <h4>{{actorDetail.popularity}}pts</h4>
+</div>
+<div>{{age}} years<br>{{actorDetail.place_of_birth}}</div>
+<h3 *ngIf="actorDetail.also_known_as.length > 0">AKA</h3>
+<div style="max-height: 100px; overflow-y: auto">
+  <div *ngFor="let name of actorDetail.also_known_as">
+    {{name}}
+  </div>
+</div>
+<mat-divider></mat-divider>
+<br>
+<div style="max-height: 200px; overflow-y: auto">{{actorDetail.biography}}</div>
