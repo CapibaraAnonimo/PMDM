@@ -9,12 +9,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { ActorsDialogComponent } from './components/actors-dialog/actors-dialog.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ActorsListComponent,
-    ActorsDialogComponent
+    ActorsDialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

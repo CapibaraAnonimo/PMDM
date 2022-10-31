@@ -1,0 +1,3 @@
+<button mat-raised-button (click)="authenticate()" *ngIf="session_id == null">Login</button>
+<button mat-raised-button (click)="logOut()" *ngIf="session_id != null">Log Out</button>
+<button>{{session_id}}</button>
