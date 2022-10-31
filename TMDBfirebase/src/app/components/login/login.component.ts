@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
-import {Router} from "@angular/router";
+import {AccountService} from "../../services/account.service";
 
 @Component({
   selector: 'app-login',
@@ -10,11 +10,17 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   requestToken: string = '';
   session_id: string|null = localStorage.getItem('session_id');
+  userName!: string|null;
+  avatar!: string|null;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private authenticationService: AuthenticationService, private accountService: AccountService) {
   }
 
   ngOnInit(): void {
+    this.accountService.getDetails().subscribe(response => {
+      this.userName = response.username;
+      this.avatar = response.avatar.tmdb.avatar_path;
+    })
   }
 
   authenticate() {
@@ -25,7 +31,10 @@ export class LoginComponent implements OnInit {
   }
 
   logOut() {
+    this.authenticationService.deleteSession(localStorage.getItem('session_id') || '').subscribe();
     localStorage.removeItem('session_id')
     this.session_id = null;
+    this.userName = null;
+    this.avatar = null;
   }
 }

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
-import {DeleteSessionResponse, NewSessionResponse, RequestTokenResponse} from "../interfaces/authentication.interface";
+import {NewSessionResponse, RequestTokenResponse} from "../interfaces/authentication.interface";
 import {NewSessionDto} from "../dto/new-session.dto";
 
 @Injectable({
@@ -21,7 +21,7 @@ export class AuthenticationService {
     return this.http.post<NewSessionResponse>(`${(environment.urlBase)}/authentication/session/new?api_key=${environment.apiKey}&request_token=`, request_token)
   }
 
-  public deleteSession(request_token: NewSessionDto): Observable<unknown> {
-    return this.http.delete(`${(environment.urlBase)}/authentication/session/new?api_key=${environment.apiKey}&request_token=`, request_token)
+  public deleteSession(session_id: string): Observable<unknown> {
+    return this.http.delete(`${(environment.urlBase)}/authentication/session/new?api_key=${environment.apiKey}&session_id=${session_id}`)
   }
 }

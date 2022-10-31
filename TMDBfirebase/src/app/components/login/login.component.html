@@ -1,3 +1,9 @@
-<button mat-raised-button (click)="authenticate()" *ngIf="session_id == null">Login</button>
-<button mat-raised-button (click)="logOut()" *ngIf="session_id != null">Log Out</button>
-<button>{{session_id}}</button>
+<mat-toolbar color="primary">
+  <div style="width: 300px;" fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button (click)="authenticate()" *ngIf="session_id == null">Login</button>
+    <button mat-raised-button (click)="logOut()" *ngIf="session_id != null">Log Out</button>
+    <h3 *ngIf="session_id != null">{{userName}}</h3>
+    <img src="https://image.tmdb.org/t/p/w200{{avatar}}" alt="avatar" height="40px" width="40px"
+         style="border-radius: 100px" *ngIf="session_id != null">
+  </div>
+</mat-toolbar>
