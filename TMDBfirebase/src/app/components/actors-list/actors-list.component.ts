@@ -3,9 +3,6 @@ import {ActorsService} from "../../services/actors.service";
 import {Actor} from "../../interfaces/actors.interface";
 import {MatDialog} from "@angular/material/dialog";
 import {ActorsDialogComponent} from "../actors-dialog/actors-dialog.component";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthenticationService} from "../../services/authentication.service";
-import {NewSessionDto} from "../../dto/new-session.dto";
 
 @Component({
   selector: 'app-actors-list',
@@ -16,27 +13,18 @@ export class ActorsListComponent implements OnInit {
   actors: Actor[] = [];
   totalPages: number = 0;
   page: number = 1;
-  logged: boolean = false;
+  navigator: number = 0;
 
-  constructor(private actorService: ActorsService, public dialog: MatDialog, private route: ActivatedRoute,
-              private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private actorService: ActorsService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.actorService.getActorsPopular().subscribe(response => {
       this.actors = response.results;
       this.totalPages = response.total_pages;
-    });
-    this.route.queryParams.subscribe(response => {
-      const requestToken = response['request_token'];
-      this.logged = response['approved'] == 'true';
 
-      if (this.logged) {
-        this.authenticationService.createSession(new NewSessionDto({request_token: requestToken})).subscribe(response => {
-          localStorage.setItem('session_id', response.session_id);
-          this.router.navigate(['']).then(() => window.location.reload());
-        });
-      }
+      this.navigator = document.getElementById('navigator')!.offsetWidth/2 + document.getElementById('navigator')!.offsetWidth%2;
+      document.getElementById('navigator')!.style["marginLeft"] = navigator.toString();
     });
   }
 
@@ -44,6 +32,9 @@ export class ActorsListComponent implements OnInit {
     this.actorService.getActorsPopular(page.toString()).subscribe(response => {
       this.actors = response.results;
       this.page = response.page;
+
+      this.navigator = document.getElementById('navigator')!.offsetWidth/2 + document.getElementById('navigator')!.offsetWidth%2;
+      document.getElementById('navigator')!.style.marginLeft = navigator.toString();
     });
   }
 
