@@ -10,6 +10,7 @@ import {Result} from "../interfaces/pokemon-response.interface";
 })
 export class PokemonsComponent implements OnInit {
   listadoPokemon: Result[] = [];
+  selectedPokemon!: Result;
 
   constructor(private pokemonService: PokeApiService) {
   }
@@ -21,18 +22,9 @@ export class PokemonsComponent implements OnInit {
         result.pokemon = response;
       }))
     })
-
-    /*for (let result of this.listadoPokemon) {
-      this.pokemonService.getPokemonURL(result.url).subscribe(response => {
-        result.pokemon = response;
-      })
-    }*/
   }
 
-  /*getPokemon(id: string): void {
-    this.pokemonService.getPokemon('34').subscribe(response => {
-      this.pokemon = response;
-    })
-  }*/
-
+  selectPokemon(pokemon: Result) {
+    this.selectedPokemon = pokemon;
+  }
 }

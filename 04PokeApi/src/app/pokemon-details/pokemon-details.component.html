@@ -1,0 +1,16 @@
+<mat-card class="example-card" style="margin: 20px">
+  <mat-card-title style="text-transform: capitalize">&nbsp;&nbsp;&nbsp;&nbsp;{{poke.name}}</mat-card-title>
+  <mat-card-subtitle>#{{poke.pokemon.id}}</mat-card-subtitle>
+  <img src="{{poke.pokemon.sprites.other['official-artwork'].front_default}}" alt="{{poke.name}}-image" width="400px">
+  <mat-card-content>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions style="display: flex; flex-direction: row; justify-content: space-between">
+    <div>
+      <div *ngFor="let tipo of poke.pokemon.types">
+        {{tipo.type.name}}
+      </div>
+    </div>
+    <button mat-raised-button (click)="selectPokemon()">Seleccionar</button>
+  </mat-card-actions>
+</mat-card>
