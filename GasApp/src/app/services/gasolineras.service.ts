@@ -14,4 +14,8 @@ export class GasolinerasService {
   getGasolineras(): Observable<GasolinerasResponse>{
     return this.http.get<GasolinerasResponse>(`https://raw.githubusercontent.com/CapibaraAnonimo/PMDM/master/gasApp.json`);
   }
+
+  getGasolinerasByMunicipio(id: string): Observable<GasolinerasResponse>{
+    return this.http.get<GasolinerasResponse>(`https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroMunicipio/${id}`);
+  }
 }

@@ -8,7 +8,7 @@
       <label id="example-name-label" class="example-name-label">Max Value: </label>
       <label class="example-value-label">{{maxSliderValue}}</label>
     </div>
-    <mat-slider class="example-margin"
+    <mat-slider class="example-margin" (change)="filter()"
       [disabled]="disabled"
       [invert]="invert"
       [max]="max"
@@ -23,13 +23,22 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Combustibles</mat-label>
-      <mat-select (selectionChange)="filter()" [(value)]="selections" [formControl]="combustibles" multiple>
+      <mat-select (selectionChange)="filter()" [(value)]="conbustiblesSeleccionados" [formControl]="combustibles" multiple>
         <mat-option *ngFor="let combustible of listaCombustibles" [value]="combustible">{{combustible}}</mat-option>
       </mat-select>
+    </mat-form-field>
 
+    <mat-form-field appearance="fill">
       <mat-label>Provincias</mat-label>
-      <mat-select (selectionChange)="filter()" [(value)]="selections" [formControl]="combustibles" multiple>
-        <mat-option *ngFor="let provincia of provincias" [value]="provincia['Provincia']">{{provincia['Provincia']}}</mat-option>
+      <mat-select (selectionChange)="actualizarMunicipios()" [(value)]="provinciasSeleccionadas" [formControl]="provinciaForm" multiple>
+        <mat-option *ngFor="let provincia of provincias" [value]="provincia">{{provincia['Provincia']}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Provincias</mat-label>
+      <mat-select (selectionChange)="actualizarGasolineras()" [(value)]="municipiosSeleccionados" [formControl]="localidadesForm" multiple>
+        <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio['Municipio']}}</mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card-content>
