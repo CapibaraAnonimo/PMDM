@@ -1,0 +1,18 @@
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+  <div *ngFor="let gaso of gasolineras" style="margin: 50px">
+    <div *ngIf="gaso['Rótulo'] !== ''">Nombre: {{gaso['Rótulo']}}</div>
+    <div *ngIf="gaso['Dirección'] !== ''">Dirección: {{gaso['Dirección']}}</div>
+    <div *ngIf="gaso['Precio Gasoleo A'] !== ''">Gasóleo A: {{gaso['Precio Gasoleo A']}}€</div>
+    <div *ngIf="gaso['Precio Gasoleo B'] !== ''">Gasoleo B: {{gaso['Precio Gasoleo B']}}€</div>
+    <div *ngIf="gaso['Precio Gasoleo Premium'] !== ''">Gasoleo Premium: {{gaso['Precio Gasoleo Premium']}}€</div>
+
+
+    <div *ngIf="gaso['Precio Gasolina 95 E10'] !== ''">Gasolina 95 E10: {{gaso['Precio Gasolina 95 E10']}}€</div>
+    <div *ngIf="gaso['Precio Gasolina 95 E5'] !== ''">Gasolina 95 E5: {{gaso['Precio Gasolina 95 E5']}}€</div>
+    <div *ngIf="gaso['Precio Gasolina 95 E5 Premium'] !== ''">Gasolina 95 E5 Premium: {{gaso['Precio Gasolina 95 E5 Premium']}}€</div>
+    <div *ngIf="gaso['Precio Gasolina 98 E10'] !== ''">Gasolina 98 E10: {{gaso['Precio Gasolina 98 E10']}}€</div>
+    <div *ngIf="gaso['Precio Gasolina 98 E5'] !== ''">Gasolina 98 E5: {{gaso['Precio Gasolina 98 E5']}}€</div>
+
+    <div *ngIf="gaso['Precio Hidrogeno'] !== ''">Hidrogeno: {{gaso['Precio Hidrogeno']}}€</div>
+  </div>
+</div>
