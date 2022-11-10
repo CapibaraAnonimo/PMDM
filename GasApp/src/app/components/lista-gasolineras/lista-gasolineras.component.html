@@ -1,5 +1,43 @@
+<mat-card class="example-result-card">
+  <mat-card-content>
+    <h2>Result</h2>
+    <br>
+    <br>
+
+    <div class="example-label-container" [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'">
+      <label id="example-name-label" class="example-name-label">Max Value: </label>
+      <label class="example-value-label">{{maxSliderValue}}</label>
+    </div>
+    <mat-slider class="example-margin"
+      [disabled]="disabled"
+      [invert]="invert"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [thumbLabel]="thumbLabel"
+      [tickInterval]="tickInterval"
+      [(ngModel)]="maxSliderValue"
+      [vertical]="vertical"
+      aria-labelledby="example-name-label">
+    </mat-slider>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Combustibles</mat-label>
+      <mat-select (selectionChange)="filter()" [(value)]="selections" [formControl]="combustibles" multiple>
+        <mat-option *ngFor="let combustible of listaCombustibles" [value]="combustible">{{combustible}}</mat-option>
+      </mat-select>
+
+      <mat-label>Provincias</mat-label>
+      <mat-select (selectionChange)="filter()" [(value)]="selections" [formControl]="combustibles" multiple>
+        <mat-option *ngFor="let provincia of provincias" [value]="provincia['Provincia']">{{provincia['Provincia']}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
-  <div *ngFor="let gaso of gasolineras" style="margin: 50px">
+  <div *ngFor="let gaso of filteredGasolineras" style="margin: 50px">
     <div *ngIf="gaso['Rótulo'] !== ''">Nombre: {{gaso['Rótulo']}}</div>
     <div *ngIf="gaso['Dirección'] !== ''">Dirección: {{gaso['Dirección']}}</div>
     <div *ngIf="gaso['Precio Gasoleo A'] !== ''">Gasóleo A: {{gaso['Precio Gasoleo A']}}€</div>
