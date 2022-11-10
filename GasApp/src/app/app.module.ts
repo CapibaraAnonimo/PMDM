@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ListaGasolinerasComponent } from './components/lista-gasolineras/lista-gasolineras.component';
 import { HttpClientModule } from "@angular/common/http";
 import { MaterialImportsModule } from "./modules/material-imports.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MaterialImportsModule } from "./modules/material-imports.module";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MaterialImportsModule
+    MaterialImportsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
