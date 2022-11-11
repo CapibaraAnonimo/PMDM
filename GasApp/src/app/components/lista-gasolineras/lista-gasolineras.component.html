@@ -1,25 +1,28 @@
 <mat-card class="example-result-card">
   <mat-card-content>
-    <h2>Result</h2>
+    <h2>{{filteredGasolineras.length}} Gasolineras</h2>
     <br>
     <br>
 
-    <div class="example-label-container" [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'">
-      <label id="example-name-label" class="example-name-label">Max Value: </label>
-      <label class="example-value-label">{{maxSliderValue}}</label>
+    <div>
+      <div class="example-label-container" [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'">
+        <label id="example-name-label" class="example-name-label">Precio Máximo: </label>
+        <label class="example-value-label">{{maxSliderValue}}€</label>
+      </div>
+      <mat-slider class="example-margin" (change)="filter()"
+                  [disabled]="disabled"
+                  [invert]="invert"
+                  [max]="max"
+                  [min]="min"
+                  [step]="step"
+                  [thumbLabel]="thumbLabel"
+                  [tickInterval]="tickInterval"
+                  [(ngModel)]="maxSliderValue"
+                  [vertical]="vertical"
+                  aria-labelledby="example-name-label"
+                  style="width: 700px">
+      </mat-slider>
     </div>
-    <mat-slider class="example-margin" (change)="filter()"
-      [disabled]="disabled"
-      [invert]="invert"
-      [max]="max"
-      [min]="min"
-      [step]="step"
-      [thumbLabel]="thumbLabel"
-      [tickInterval]="tickInterval"
-      [(ngModel)]="maxSliderValue"
-      [vertical]="vertical"
-      aria-labelledby="example-name-label">
-    </mat-slider>
 
     <mat-form-field appearance="fill">
       <mat-label>Combustibles</mat-label>
@@ -36,30 +39,23 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Provincias</mat-label>
-      <mat-select (selectionChange)="actualizarGasolineras()" [(value)]="municipiosSeleccionados" [formControl]="localidadesForm" multiple>
+      <mat-label>Municipios</mat-label>
+      <mat-select [disabled]="municipios.length == 0" (selectionChange)="actualizarGasolineras()" [(value)]="municipiosSeleccionados" [formControl]="localidadesForm" multiple>
         <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio['Municipio']}}</mat-option>
       </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>Clearable input</mat-label>
+      <input matInput [(ngModel)]="consumo" type="number" step="0.1">
+      <button *ngIf="consumo" matSuffix mat-icon-button aria-label="Clear" (click)="consumo=0">
+        <mat-icon>close</mat-icon>
+      </button>
     </mat-form-field>
   </mat-card-content>
 </mat-card>
 
-
-<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
-  <div *ngFor="let gaso of filteredGasolineras" style="margin: 50px">
-    <div *ngIf="gaso['Rótulo'] !== ''">Nombre: {{gaso['Rótulo']}}</div>
-    <div *ngIf="gaso['Dirección'] !== ''">Dirección: {{gaso['Dirección']}}</div>
-    <div *ngIf="gaso['Precio Gasoleo A'] !== ''">Gasóleo A: {{gaso['Precio Gasoleo A']}}€</div>
-    <div *ngIf="gaso['Precio Gasoleo B'] !== ''">Gasoleo B: {{gaso['Precio Gasoleo B']}}€</div>
-    <div *ngIf="gaso['Precio Gasoleo Premium'] !== ''">Gasoleo Premium: {{gaso['Precio Gasoleo Premium']}}€</div>
-
-
-    <div *ngIf="gaso['Precio Gasolina 95 E10'] !== ''">Gasolina 95 E10: {{gaso['Precio Gasolina 95 E10']}}€</div>
-    <div *ngIf="gaso['Precio Gasolina 95 E5'] !== ''">Gasolina 95 E5: {{gaso['Precio Gasolina 95 E5']}}€</div>
-    <div *ngIf="gaso['Precio Gasolina 95 E5 Premium'] !== ''">Gasolina 95 E5 Premium: {{gaso['Precio Gasolina 95 E5 Premium']}}€</div>
-    <div *ngIf="gaso['Precio Gasolina 98 E10'] !== ''">Gasolina 98 E10: {{gaso['Precio Gasolina 98 E10']}}€</div>
-    <div *ngIf="gaso['Precio Gasolina 98 E5'] !== ''">Gasolina 98 E5: {{gaso['Precio Gasolina 98 E5']}}€</div>
-
-    <div *ngIf="gaso['Precio Hidrogeno'] !== ''">Hidrogeno: {{gaso['Precio Hidrogeno']}}€</div>
-  </div>
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around">
+  <app-carta-gasolinera [distancia]="getDistanceFromLatLonInKm(+(gaso['Latitud'].replace(',', '.')), +gaso['Longitud (WGS84)'].replace(',', '.'), 37.3803587, -6.0075884)" [gasolinera]="gaso"  *ngFor="let gaso of filteredGasolineras">
+  </app-carta-gasolinera>
 </div>

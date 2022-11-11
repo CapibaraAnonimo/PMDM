@@ -8,11 +8,13 @@ import { HttpClientModule } from "@angular/common/http";
 import { MaterialImportsModule } from "./modules/material-imports.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CartaGasolineraComponent } from './components/carta-gasolinera/carta-gasolinera.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListaGasolinerasComponent
+    ListaGasolinerasComponent,
+    CartaGasolineraComponent
   ],
     imports: [
         BrowserModule,

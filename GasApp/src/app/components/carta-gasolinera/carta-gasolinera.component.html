@@ -1,0 +1,51 @@
+<div style="width: 350px; margin: 50px; background-color: whitesmoke">
+  <div *ngIf="gasolinera['Rótulo'] !== ''">
+    Nombre: {{gasolinera['Rótulo']}}
+  </div>
+  <div *ngIf="gasolinera['Dirección'] !== ''">
+    Dirección: {{gasolinera['Dirección']}}
+  </div>
+  <div *ngIf="gasolinera['Latitud'] !== ''">
+    Latitud: {{gasolinera['Latitud']}}
+  </div>
+  <div *ngIf="gasolinera['Longitud (WGS84)'] !== ''">
+    Longitud: {{gasolinera['Longitud (WGS84)']}}
+  </div>
+
+  <div *ngIf="gasolinera['Longitud (WGS84)'] !== ''">
+    Distancia: {{distancia.toFixed(2)}}Km
+  </div>
+
+  <!--Gasóleos-->
+  <div *ngIf="gasolinera['Precio Gasoleo A'] !== ''">
+    Gasóleo A: {{gasolinera['Precio Gasoleo A']}}€
+  </div>
+  <div *ngIf="gasolinera['Precio Gasoleo B'] !== ''">
+    Gasoleo B: {{gasolinera['Precio Gasoleo B']}}€
+  </div>
+  <div *ngIf="gasolinera['Precio Gasoleo Premium'] !== ''">
+    Gasoleo Premium: {{gasolinera['Precio Gasoleo Premium']}}€
+  </div>
+
+  <!--Gasolinas-->
+  <div *ngIf="gasolinera['Precio Gasolina 95 E10'] !== ''">
+    Gasolina 95 E10: {{gasolinera['Precio Gasolina 95 E10']}}€
+  </div>
+  <div *ngIf="gasolinera['Precio Gasolina 95 E5'] !== ''">
+    Gasolina 95 E5: {{gasolinera['Precio Gasolina 95 E5']}}€
+  </div>
+  <div *ngIf="gasolinera['Precio Gasolina 95 E5 Premium'] !== ''">
+    Gasolina 95 E5 Premium: {{gasolinera['Precio Gasolina 95 E5 Premium']}}€
+  </div>
+  <div *ngIf="gasolinera['Precio Gasolina 98 E10'] !== ''">
+    Gasolina 98 E10: {{gasolinera['Precio Gasolina 98 E10']}}€
+  </div>
+  <div *ngIf="gasolinera['Precio Gasolina 98 E5'] !== ''">
+    Gasolina 98 E5: {{gasolinera['Precio Gasolina 98 E5']}}€
+  </div>
+
+  <!--Hidrogeno-->
+  <div *ngIf="gasolinera['Precio Hidrogeno'] !== ''">
+    Hidrogeno: {{gasolinera['Precio Hidrogeno']}}€
+  </div>
+</div>

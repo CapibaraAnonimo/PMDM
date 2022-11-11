@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {GasolinerasService} from "../../services/gasolineras.service";
-import {ListaEESSPrecio} from "../../interfaces/gasolineras.interface";
-import {FormControl} from "@angular/forms";
-import {ProvinciaResponse} from "../../interfaces/provincias.interface";
-import {ProvinciasService} from "../../services/provincias.service";
-import {MunicipioResponse} from "../../interfaces/municipio.interface";
-import {MunicipiosService} from "../../services/municipios.service";
+import { Component, OnInit } from '@angular/core';
+import { GasolinerasService } from "../../services/gasolineras.service";
+import { GasolinerasResponse, ListaEESSPrecio } from "../../interfaces/gasolineras.interface";
+import { FormControl } from "@angular/forms";
+import { ProvinciaResponse } from "../../interfaces/provincias.interface";
+import { ProvinciasService } from "../../services/provincias.service";
+import { MunicipioResponse } from "../../interfaces/municipio.interface";
+import { MunicipiosService } from "../../services/municipios.service";
+import { forkJoin, Observable } from "rxjs";
 
 @Component({
   selector: 'app-lista-gasolineras',
@@ -22,9 +23,9 @@ export class ListaGasolinerasComponent implements OnInit {
   max = 5;
   min = 0;
   showTicks = true;
-  step = 0.1;
+  step = 0.01;
   thumbLabel = true;
-  maxSliderValue = 0;
+  maxSliderValue = 5;
   vertical = false;
   tickInterval = 1;
 
@@ -40,6 +41,8 @@ export class ListaGasolinerasComponent implements OnInit {
   localidadesForm = new FormControl('');
   municipios: MunicipioResponse[] = [];
   municipiosSeleccionados: MunicipioResponse[] = [];
+
+  consumo: number = 0;
 
   constructor(private gasolineraService: GasolinerasService, private provinciasService: ProvinciasService, private municipiosService: MunicipiosService) {
   }
@@ -82,27 +85,44 @@ export class ListaGasolinerasComponent implements OnInit {
   }
 
   actualizarGasolineras() {
+    let listaRequest: Observable<GasolinerasResponse>[] = [];
+
     if (this.municipiosSeleccionados.length !== 0) {
       this.gasolineras = [];
 
-      this.gasolineras = this.gasolinerasVariosMunicipios(this.municipiosSeleccionados.length);
+      for (let municipio of this.municipiosSeleccionados) {
+        listaRequest.push(this.gasolineraService.getGasolinerasByMunicipio(municipio.IDMunicipio));
+      }
 
-      this.filteredGasolineras = this.gasolineras;
-      alert(this.gasolineras.length);
-      this.filter();
+      forkJoin([...listaRequest]).subscribe(response => {
+        for (let re of response) {
+          for (let r of re.ListaEESSPrecio) {
+            this.gasolineras = this.gasolineras.concat(r);
+          }
+        }
+
+        this.filteredGasolineras = this.gasolineras;
+        this.filter();
+      });
+
     }
   }
 
-  gasolinerasVariosMunicipios(iTotal: number, i: number = 0): ListaEESSPrecio[] {
-    let gasos: ListaEESSPrecio[] = [];
+  getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon2: number) {
+    let R = 6371; // Radius of the earth in km
+    let dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+    let dLon = this.deg2rad(lon2 - lon1);
+    let a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c; // Distance in km
+    return d;
+  }
 
-    gasos = this.gasolineraService.getGasolinerasByMunicipio(this.municipiosSeleccionados[i].IDMunicipio).subscribe(response => {
-      gasos = gasos.concat(response.ListaEESSPrecio);
-      if (i < iTotal) {
-        i += 1;
-        gasos = gasos.concat(this.gasolinerasVariosMunicipios(iTotal, i));
-      }
-    });
-    return gasos;
+  deg2rad(deg: number) {
+    return deg * (Math.PI / 180)
   }
 }
