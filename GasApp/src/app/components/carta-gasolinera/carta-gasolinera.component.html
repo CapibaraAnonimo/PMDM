@@ -1,4 +1,7 @@
-<div style="width: 350px; margin: 50px; background-color: whitesmoke">
+<div (scroll)="execute()" (click)="sendEvent()" style="width: 350px; margin: 50px; background-color: whitesmoke">
+  <input [(ngModel)]="send" hidden>
+
+
   <div *ngIf="gasolinera['Rótulo'] !== ''">
     Nombre: {{gasolinera['Rótulo']}}
   </div>

@@ -42,7 +42,9 @@ export class ListaGasolinerasComponent implements OnInit {
   municipios: MunicipioResponse[] = [];
   municipiosSeleccionados: MunicipioResponse[] = [];
 
-  consumo: number = 0;
+  consumo!: number;
+  distanciaActual!: number;
+  gasolineraActual!: ListaEESSPrecio;
 
   constructor(private gasolineraService: GasolinerasService, private provinciasService: ProvinciasService, private municipiosService: MunicipiosService) {
   }
@@ -124,5 +126,26 @@ export class ListaGasolinerasComponent implements OnInit {
 
   deg2rad(deg: number) {
     return deg * (Math.PI / 180)
+  }
+
+  distanciaGasolinera(gaso: HTMLElement) {
+
+    return 10;
+  }
+
+  calcularMejorGasolinera() {
+    let mejorDistancia: number = 100000000000000000000000000000000;
+    let mejorGasolinera: ListaEESSPrecio = this.gasolineraActual;
+
+    for (let element of Array.from(document.getElementsByName('gasolinera'))) {
+      alert(this.distanciaActual);
+      if (this.distanciaActual < mejorDistancia){
+        mejorDistancia = this.distanciaActual;
+        mejorGasolinera = this.gasolineraActual;
+      }
+    }
+
+    this.filteredGasolineras = [];
+    this.filteredGasolineras.push(mejorGasolinera);
   }
 }
