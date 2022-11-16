@@ -9,7 +9,7 @@ import { Subject } from "rxjs";
 })
 export class CartaGasolineraComponent implements OnInit {
   @Input() gasolinera!: ListaEESSPrecio;
-  @Input() distancia!: number;
+  @Input() distancia: number = 0;
   @Input() send!: number;
   @Input() parentSubject!: Subject<any>;
   @Output() executeEvent = new EventEmitter<boolean>();
@@ -22,7 +22,6 @@ export class CartaGasolineraComponent implements OnInit {
   }
 
   sendEvent() {
-    alert('se usa');
     this.distanciaEvent.emit([this.distancia, this.gasolinera]);
   }
 

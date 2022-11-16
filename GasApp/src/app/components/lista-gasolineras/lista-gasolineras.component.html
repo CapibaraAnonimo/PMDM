@@ -1,3 +1,5 @@
+<script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+</script>
 <mat-card class="example-result-card">
   <mat-card-content>
     <h2>{{filteredGasolineras.length}} Gasolineras</h2>
@@ -26,21 +28,24 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Combustibles</mat-label>
-      <mat-select (selectionChange)="filter()" [(value)]="conbustiblesSeleccionados" [formControl]="combustibles" multiple>
+      <mat-select (selectionChange)="filter()" [(value)]="conbustiblesSeleccionados" [formControl]="combustibles"
+                  multiple>
         <mat-option *ngFor="let combustible of listaCombustibles" [value]="combustible">{{combustible}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Provincias</mat-label>
-      <mat-select (selectionChange)="actualizarMunicipios()" [(value)]="provinciasSeleccionadas" [formControl]="provinciaForm" multiple>
+      <mat-select (selectionChange)="actualizarMunicipios()" [(value)]="provinciasSeleccionadas"
+                  [formControl]="provinciaForm" multiple>
         <mat-option *ngFor="let provincia of provincias" [value]="provincia">{{provincia['Provincia']}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Municipios</mat-label>
-      <mat-select [disabled]="municipios.length == 0" (selectionChange)="actualizarGasolineras()" [(value)]="municipiosSeleccionados" [formControl]="localidadesForm" multiple>
+      <mat-select [disabled]="municipios.length == 0" (selectionChange)="actualizarGasolineras()"
+                  [(value)]="municipiosSeleccionados" [formControl]="localidadesForm" multiple>
         <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio['Municipio']}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -56,7 +61,21 @@
   </mat-card-content>
 </mat-card>
 
+<div *ngIf="apiLoaded | async">
+  <google-map [center]="center" [zoom]="6">
+    <div *ngFor="let gasolinera of filteredGasolineras, let i = index">
+      <map-marker #marker='mapMarker' [position]=crearCoordenadas(gasolinera) (mapClick)="abrirInfoWindow(marker, infoWindow)">
+      </map-marker>
+      <map-info-window #infoWindow='mapInfoWindow' content="">
+        <app-carta-gasolinera [gasolinera]="gasolinera"></app-carta-gasolinera>
+      </map-info-window>
+    </div>
+  </google-map>
+</div>
+
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around">
-  <app-carta-gasolinera (distanciaEvent)="distanciaActual = $event[0]; gasolineraActual = $event[1]" name="gasolinera" [distancia]="getDistanceFromLatLonInKm(+(gaso['Latitud'].replace(',', '.')), +gaso['Longitud (WGS84)'].replace(',', '.'), 37.3803587, -6.0075884)" [gasolinera]="gaso"  *ngFor="let gaso of filteredGasolineras">
+  <app-carta-gasolinera (distanciaEvent)="distanciaActual = $event[0]; gasolineraActual = $event[1]" name="gasolinera"
+                        [distancia]="getDistanceFromLatLonInKm(+(gaso['Latitud'].replace(',', '.')), +gaso['Longitud (WGS84)'].replace(',', '.'), 37.3803587, -6.0075884)"
+                        [gasolinera]="gaso" *ngFor="let gaso of filteredGasolineras" style="width: 350px; padding: 20px; margin: 50px; background-color: whitesmoke">
   </app-carta-gasolinera>
 </div>

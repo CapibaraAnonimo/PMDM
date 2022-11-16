@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { GasolinerasService } from "../../services/gasolineras.service";
-import { GasolinerasResponse, ListaEESSPrecio } from "../../interfaces/gasolineras.interface";
-import { FormControl } from "@angular/forms";
-import { ProvinciaResponse } from "../../interfaces/provincias.interface";
-import { ProvinciasService } from "../../services/provincias.service";
-import { MunicipioResponse } from "../../interfaces/municipio.interface";
-import { MunicipiosService } from "../../services/municipios.service";
-import { forkJoin, Observable } from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {GasolinerasService} from "../../services/gasolineras.service";
+import {GasolinerasResponse, ListaEESSPrecio} from "../../interfaces/gasolineras.interface";
+import {FormControl} from "@angular/forms";
+import {ProvinciaResponse} from "../../interfaces/provincias.interface";
+import {ProvinciasService} from "../../services/provincias.service";
+import {MunicipioResponse} from "../../interfaces/municipio.interface";
+import {MunicipiosService} from "../../services/municipios.service";
+import {forkJoin, Observable, of} from "rxjs";
+import {HttpClient} from '@angular/common/http';
+import {catchError, map} from 'rxjs/operators';
+import {MapInfoWindow, MapMarker} from "@angular/google-maps";
 
 @Component({
   selector: 'app-lista-gasolineras',
@@ -14,8 +17,11 @@ import { forkJoin, Observable } from "rxjs";
   styleUrls: ['./lista-gasolineras.component.css']
 })
 export class ListaGasolinerasComponent implements OnInit {
+  apiLoaded: Observable<boolean>;
+  center = {lng: -3.7025600, lat: 40.4165000};
+
   gasolineras!: ListaEESSPrecio[];
-  filteredGasolineras!: ListaEESSPrecio[];
+  filteredGasolineras: ListaEESSPrecio[] = [];
 
   autoTicks = false;
   disabled = false;
@@ -46,7 +52,13 @@ export class ListaGasolinerasComponent implements OnInit {
   distanciaActual!: number;
   gasolineraActual!: ListaEESSPrecio;
 
-  constructor(private gasolineraService: GasolinerasService, private provinciasService: ProvinciasService, private municipiosService: MunicipiosService) {
+  constructor(private gasolineraService: GasolinerasService, private provinciasService: ProvinciasService,
+              private municipiosService: MunicipiosService, httpClient: HttpClient) {
+    this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?AIzaSyC4GrRSpLl5avrtfOK9OSKrGHOiI1dXoms', 'callback')
+      .pipe(
+        map(() => true),
+        catchError(() => of(false)),
+      );
   }
 
   ngOnInit(): void {
@@ -128,18 +140,13 @@ export class ListaGasolinerasComponent implements OnInit {
     return deg * (Math.PI / 180)
   }
 
-  distanciaGasolinera(gaso: HTMLElement) {
-
-    return 10;
-  }
-
   calcularMejorGasolinera() {
     let mejorDistancia: number = 100000000000000000000000000000000;
     let mejorGasolinera: ListaEESSPrecio = this.gasolineraActual;
 
     for (let element of Array.from(document.getElementsByName('gasolinera'))) {
       alert(this.distanciaActual);
-      if (this.distanciaActual < mejorDistancia){
+      if (this.distanciaActual < mejorDistancia) {
         mejorDistancia = this.distanciaActual;
         mejorGasolinera = this.gasolineraActual;
       }
@@ -147,5 +154,13 @@ export class ListaGasolinerasComponent implements OnInit {
 
     this.filteredGasolineras = [];
     this.filteredGasolineras.push(mejorGasolinera);
+  }
+
+  crearCoordenadas(gasolinera: ListaEESSPrecio): google.maps.LatLng {
+    return new google.maps.LatLng(+(gasolinera['Latitud'].replace(',', '.')), +gasolinera['Longitud (WGS84)'].replace(',', '.'));
+  }
+
+  abrirInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow) {
+    infoWindow.open(marker);
   }
 }
