@@ -50,19 +50,19 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="example-form-field" appearance="fill">
+    <!--<mat-form-field class="example-form-field" appearance="fill">
       <mat-label>Consumo del coche(L/100Km)</mat-label>
       <input matInput [(ngModel)]="consumo" type="number" step="0.1">
       <button *ngIf="consumo" matSuffix mat-icon-button aria-label="Clear" (click)="consumo = 0">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-    <button (click)="calcularMejorGasolinera()" mat-raised-button>Calcular Más Óptimo</button>
+    <button (click)="calcularMejorGasolinera()" mat-raised-button>Calcular Más Óptimo</button>-->
   </mat-card-content>
 </mat-card>
 
 <div *ngIf="apiLoaded | async">
-  <google-map [center]="center" [zoom]="6">
+  <google-map [center]="center" [zoom]="6" [width]="'100%'" [height]="700">
     <div *ngFor="let gasolinera of filteredGasolineras, let i = index">
       <map-marker #marker='mapMarker' [position]=crearCoordenadas(gasolinera) (mapClick)="abrirInfoWindow(marker, infoWindow)">
       </map-marker>
@@ -73,9 +73,9 @@
   </google-map>
 </div>
 
-<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around">
+<!--<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around">
   <app-carta-gasolinera (distanciaEvent)="distanciaActual = $event[0]; gasolineraActual = $event[1]" name="gasolinera"
                         [distancia]="getDistanceFromLatLonInKm(+(gaso['Latitud'].replace(',', '.')), +gaso['Longitud (WGS84)'].replace(',', '.'), 37.3803587, -6.0075884)"
                         [gasolinera]="gaso" *ngFor="let gaso of filteredGasolineras" style="width: 350px; padding: 20px; margin: 50px; background-color: whitesmoke">
   </app-carta-gasolinera>
-</div>
+</div>-->
