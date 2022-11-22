@@ -55,3 +55,8 @@ Thumbs.db
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

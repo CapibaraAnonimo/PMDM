@@ -1,1 +1,13 @@
+<div *ngIf="auth.user | async as user; else login">
+  {{user.uid}} - {{user.email}}
+</div>
+
+<ng-template #login>
+  <div>
+    <button (click)="auth.glogin()">
+      Login
+    </button>
+  </div>
+</ng-template>
+
 <app-pokemons></app-pokemons>

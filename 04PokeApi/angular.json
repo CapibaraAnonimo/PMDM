@@ -96,6 +96,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "04PokeApi:build:production",
+            "firebaseProject": "tmdb-firebase-aa74d",
+            "firebaseHostingSite": "tmdb-firebase-aa74d"
+          }
         }
       }
     }

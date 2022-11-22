@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "tmdb-firebase-aa74d"
+  },
+  "targets": {
+    "tmdb-firebase-aa74d": {
+      "hosting": {
+        "04PokeApi": [
+          "tmdb-firebase-aa74d"
+        ]
+      }
+    }
+  }
+}
