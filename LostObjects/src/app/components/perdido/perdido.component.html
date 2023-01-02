@@ -1,0 +1,13 @@
+<div *ngIf="apiLoaded | async">
+  {{nombre}}
+  <google-map [center]="center" [zoom]="12" [width]="'100%'" [height]="700" (mapClick)="createMarker($event)">
+      <map-marker #marker='mapMarker' [position]=coor>
+      </map-marker>
+      <map-info-window #infoWindow='mapInfoWindow' content="">
+        <!--<app-carta-gasolinera [gasolinera]="gasolinera"></app-carta-gasolinera>-->
+      </map-info-window>
+  </google-map>
+  <label>Name:</label>
+  <input type="text" [(ngModel)]="nombre" name="nombre"> <br>
+  <button (click)="savePerdido()">Save</button>
+</div>

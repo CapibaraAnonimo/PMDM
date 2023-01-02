@@ -1,0 +1,79 @@
+<mat-card class="example-result-card">
+  <mat-card-content>
+    <h2>{{filteredGasolineras.length}} Gasolineras</h2>
+    <br>
+    <br>
+
+    <div>
+      <div class="example-label-container" [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'">
+        <label id="example-name-label" class="example-name-label">Precio Máximo: </label>
+        <label class="example-value-label">{{maxSliderValue}}€</label>
+      </div>
+      <mat-slider class="example-margin" (change)="filter()"
+                  [disabled]="disabled"
+                  [invert]="invert"
+                  [max]="max"
+                  [min]="min"
+                  [step]="step"
+                  [thumbLabel]="thumbLabel"
+                  [tickInterval]="tickInterval"
+                  [(ngModel)]="maxSliderValue"
+                  [vertical]="vertical"
+                  aria-labelledby="example-name-label"
+                  style="width: 700px">
+      </mat-slider>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Combustibles</mat-label>
+      <mat-select (selectionChange)="filter()" [(value)]="conbustiblesSeleccionados" [formControl]="combustibles"
+                  multiple>
+        <mat-option *ngFor="let combustible of listaCombustibles" [value]="combustible">{{combustible}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Provincias</mat-label>
+      <mat-select (selectionChange)="actualizarMunicipios()" [(value)]="provinciasSeleccionadas"
+                  [formControl]="provinciaForm" multiple>
+        <mat-option *ngFor="let provincia of provincias" [value]="provincia">{{provincia['Provincia']}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Municipios</mat-label>
+      <mat-select [disabled]="municipios.length == 0" (selectionChange)="actualizarGasolineras()"
+                  [(value)]="municipiosSeleccionados" [formControl]="localidadesForm" multiple>
+        <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio['Municipio']}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--<mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>Consumo del coche(L/100Km)</mat-label>
+      <input matInput [(ngModel)]="consumo" type="number" step="0.1">
+      <button *ngIf="consumo" matSuffix mat-icon-button aria-label="Clear" (click)="consumo = 0">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button (click)="calcularMejorGasolinera()" mat-raised-button>Calcular Más Óptimo</button>-->
+  </mat-card-content>
+</mat-card>
+
+<div> <!--*ngIf="apiLoaded | async"-->
+  <google-map [center]="center" [zoom]="6" [width]="'100%'" [height]="700">
+    <div *ngFor="let gasolinera of filteredGasolineras, let i = index">
+      <map-marker #marker='mapMarker' [position]=crearCoordenadas(gasolinera) (mapClick)="abrirInfoWindow(marker, infoWindow)">
+      </map-marker>
+      <map-info-window #infoWindow='mapInfoWindow' content="">
+        <app-carta-gasolinera [gasolinera]="gasolinera"></app-carta-gasolinera>
+      </map-info-window>
+    </div>
+  </google-map>
+</div>
+
+<!--<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around">
+  <app-carta-gasolinera (distanciaEvent)="distanciaActual = $event[0]; gasolineraActual = $event[1]" name="gasolinera"
+                        [distancia]="getDistanceFromLatLonInKm(+(gaso['Latitud'].replace(',', '.')), +gaso['Longitud (WGS84)'].replace(',', '.'), 37.3803587, -6.0075884)"
+                        [gasolinera]="gaso" *ngFor="let gaso of filteredGasolineras" style="width: 350px; padding: 20px; margin: 50px; background-color: whitesmoke">
+  </app-carta-gasolinera>
+</div>-->

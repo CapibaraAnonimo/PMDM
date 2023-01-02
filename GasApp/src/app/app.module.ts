@@ -10,12 +10,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CartaGasolineraComponent} from './components/carta-gasolinera/carta-gasolinera.component';
 import {GoogleMapsModule} from "@angular/google-maps";
+import { PerdidoComponent } from './components/perdido/perdido.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListaGasolinerasComponent,
-    CartaGasolineraComponent
+    CartaGasolineraComponent,
+    PerdidoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "lostobjects-3a221"
+  },
+  "targets": {
+    "lostobjects-3a221": {
+      "hosting": {
+        "LostObjects": [
+          "lostobjects-3a221"
+        ]
+      }
+    }
+  }
+}
