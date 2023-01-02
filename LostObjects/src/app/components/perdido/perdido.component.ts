@@ -3,6 +3,7 @@ import {PerdidosService} from "../../services/perdidos.service";
 import {catchError, map, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {AddPerdidoDto} from "../../models/dtos/perdido.dto";
+import {PerdidosInterface} from "../../models/interfaces/perdidos.interface";
 
 
 @Component({
@@ -12,6 +13,7 @@ import {AddPerdidoDto} from "../../models/dtos/perdido.dto";
 })
 export class PerdidoComponent implements OnInit {
   apiLoaded: Observable<boolean>;
+  perdidos!: PerdidosInterface[];
   center = {lng: -3.7025600, lat: 40.4165000};
   coor: any;
 
@@ -30,6 +32,7 @@ export class PerdidoComponent implements OnInit {
 
   ngOnInit(): void {
     this.coor = {lng: -3.7025600, lat: 40.4165000};
+    this.getAllPerdidos();
   }
 
   savePerdido(): void{
@@ -46,5 +49,17 @@ export class PerdidoComponent implements OnInit {
   createMarker($event: google.maps.MapMouseEvent | google.maps.IconMouseEvent) {
     this.coor = $event.latLng;
     this.coor = {lng: $event.latLng?.lng(), lat: $event.latLng?.lat()}
+  }
+
+  getAllPerdidos(): void {
+    this.perdidoService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.perdidos = data;
+    });
   }
 }
