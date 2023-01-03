@@ -14,13 +14,15 @@ import { PerdidoComponent } from './components/perdido/perdido.component';
 import {environment} from "../environments/environment";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import { EncontradoComponent } from './components/encontrado/encontrado.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListaGasolinerasComponent,
     CartaGasolineraComponent,
-    PerdidoComponent
+    PerdidoComponent,
+    EncontradoComponent
   ],
   imports: [
     BrowserModule,

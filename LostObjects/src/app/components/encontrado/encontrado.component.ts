@@ -1,28 +1,27 @@
-import {Component, OnInit} from '@angular/core';
-import {PerdidosService} from "../../services/perdidos.service";
+import { Component, OnInit } from '@angular/core';
 import {catchError, map, Observable, of} from "rxjs";
-import {HttpClient} from "@angular/common/http";
 import {AddPerdidoDto} from "../../models/dtos/perdido.dto";
-import {PerdidosInterface} from "../../models/interfaces/perdidos.interface";
-
+import {EncontradosInterface} from "../../models/interfaces/encontrados.interface";
+import {HttpClient} from "@angular/common/http";
+import {EncontradosService} from "../../services/encontrados.service";
 
 @Component({
-  selector: 'app-perdidos',
-  templateUrl: './perdido.component.html',
-  styleUrls: ['./perdido.component.css']
+  selector: 'app-encontrado',
+  templateUrl: './encontrado.component.html',
+  styleUrls: ['./encontrado.component.css']
 })
-export class PerdidoComponent implements OnInit {
+export class EncontradoComponent implements OnInit {
   apiLoaded: Observable<boolean>;
-  perdidos!: PerdidosInterface[];
+  encontrados!: EncontradosInterface[];
   center = {lng: -3.7025600, lat: 40.4165000};
   coor: any;
 
 
-  perdido!: AddPerdidoDto;
+  encontrado!: AddPerdidoDto;
   submitted = false;
   nombre: string = '';
 
-  constructor(private  perdidoService: PerdidosService, httpClient: HttpClient) {
+  constructor(private  encontradoService: EncontradosService, httpClient: HttpClient) {
     this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?AIzaSyC4GrRSpLl5avrtfOK9OSKrGHOiI1dXoms', 'callback')
       .pipe(
         map(() => true),
@@ -35,11 +34,11 @@ export class PerdidoComponent implements OnInit {
     this.getAllPerdidos();
   }
 
-  savePerdido(): void{
+  saveEncontrado(): void{
     if (this.nombre != '' && this.nombre != null) {
-      this.perdido = new AddPerdidoDto(this.nombre, this.coor.lat, this.coor.lng)
-      this.perdidoService.create(this.perdido).then(() => {
-        alert('Created new lost object successfully!');
+      this.encontrado = new AddPerdidoDto(this.nombre, this.coor.lat, this.coor.lng)
+      this.encontradoService.create(this.encontrado).then(() => {
+        alert('Created new found object successfully!');
         this.submitted = true;
       });
     } else
@@ -52,14 +51,14 @@ export class PerdidoComponent implements OnInit {
   }
 
   getAllPerdidos(): void {
-    this.perdidoService.getAll().snapshotChanges().pipe(
+    this.encontradoService.getAll().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data()})
         )
       )
     ).subscribe(data => {
-      this.perdidos = data;
+      this.encontrados = data;
     });
   }
 }
