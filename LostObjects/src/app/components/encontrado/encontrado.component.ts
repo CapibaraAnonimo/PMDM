@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {catchError, map, Observable, of} from "rxjs";
-import {AddPerdidoDto} from "../../models/dtos/perdido.dto";
 import {EncontradosInterface} from "../../models/interfaces/encontrados.interface";
 import {HttpClient} from "@angular/common/http";
 import {EncontradosService} from "../../services/encontrados.service";
+import {AddEncontradoDto} from "../../models/dtos/encontrado.dto";
 
 @Component({
   selector: 'app-encontrado',
@@ -17,7 +17,7 @@ export class EncontradoComponent implements OnInit {
   coor: any;
 
 
-  encontrado!: AddPerdidoDto;
+  encontrado!: AddEncontradoDto;
   submitted = false;
   nombre: string = '';
 
@@ -36,7 +36,7 @@ export class EncontradoComponent implements OnInit {
 
   saveEncontrado(): void{
     if (this.nombre != '' && this.nombre != null) {
-      this.encontrado = new AddPerdidoDto(this.nombre, this.coor.lat, this.coor.lng)
+      this.encontrado = new AddEncontradoDto(this.nombre, this.coor.lat, this.coor.lng)
       this.encontradoService.create(this.encontrado).then(() => {
         alert('Created new found object successfully!');
         this.submitted = true;

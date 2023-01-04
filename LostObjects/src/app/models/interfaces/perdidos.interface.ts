@@ -1,5 +1,6 @@
 export interface PerdidosInterface {
-  usuario: string;
-  lat: number;
-  lng: number;
+  id?: string;
+  usuario?: string;
+  lat?: number;
+  lng?: number;
 }

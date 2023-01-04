@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
-import { PerdidosInterface } from '../models/interfaces/perdidos.interface';
 import {EncontradosInterface} from "../models/interfaces/encontrados.interface";
 
 @Injectable({

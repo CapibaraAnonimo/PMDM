@@ -1,7 +1,5 @@
-import {CollectionReference} from "@firebase/firestore";
-
 export interface MatchsInterface {
-  id: string;
-  perdido: CollectionReference;
-  encontrado: CollectionReference;
+  id?: string;
+  perdido?: string;
+  encontrado?: string;
 }

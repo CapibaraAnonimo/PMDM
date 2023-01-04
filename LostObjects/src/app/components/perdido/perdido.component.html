@@ -7,7 +7,16 @@
   <input type="text" [(ngModel)]="nombre" name="nombre"> <br>
   <button (click)="savePerdido()">Save</button>
 
+  perdidos
   <div *ngFor="let per of perdidos">
+    {{per.id}}
+    {{per.usuario}}
+    {{per.lat}}
+    {{per.lng}}
+  </div>
+  encontrados
+  <div *ngFor="let per of encontrados">
+    {{per.id}}
     {{per.usuario}}
     {{per.lat}}
     {{per.lng}}

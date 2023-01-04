@@ -15,6 +15,7 @@ import {environment} from "../environments/environment";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import { EncontradoComponent } from './components/encontrado/encontrado.component';
+import { MatchComponent } from './components/match/match.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EncontradoComponent } from './components/encontrado/encontrado.componen
     ListaGasolinerasComponent,
     CartaGasolineraComponent,
     PerdidoComponent,
-    EncontradoComponent
+    EncontradoComponent,
+    MatchComponent
   ],
   imports: [
     BrowserModule,

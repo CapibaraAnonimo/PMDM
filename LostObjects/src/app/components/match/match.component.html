@@ -1,0 +1,8 @@
+<div *ngIf="apiLoaded | async">
+  <button (click)="findMatches()">Find Matches</button>
+  <div *ngFor="let mat of matches">
+    {{mat.id}}
+    {{mat.perdido}}
+    {{mat.encontrado}}
+  </div>
+</div>
