@@ -1,8 +1,11 @@
 <div *ngIf="apiLoaded | async">
   <button (click)="findMatches()">Find Matches</button>
-  <div *ngFor="let mat of matches">
-    Match id: {{mat.id}} <br>
-    Lost id: {{findPerdido(mat.perdido)?.id}} <br>
-    Found id: {{findEncontrado(mat.encontrado)?.id}} <br>
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+    <div *ngFor="let mat of matches" style="margin-right: auto; margin-bottom: 20px; margin-left: 10px">
+      Match id: {{mat.id}} <br>
+      Lost id: {{findPerdido(mat.perdido)?.id}} <br>
+      Found id: {{findEncontrado(mat.encontrado)?.id}} <br>
+      <button (click)="deleteMatch(mat.id, mat.perdido, mat.encontrado)">Resolve match</button>
+    </div>
   </div>
 </div>

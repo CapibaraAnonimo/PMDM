@@ -72,8 +72,8 @@ export class MatchComponent implements OnInit {
         for (let e of this.encontrados) {
           if (e.lat != undefined && e.lng != undefined && p.id != undefined && e.id != undefined) {
             if (google.maps.geometry.spherical.computeDistanceBetween({lat: p.lat, lng: p.lng}, {
-              lat: e.lat, lng: e.lng}) <= 1000 && this.comprobarMatch(p.lat, p.lng, e.lat, e.lng)) {
-              alert("Se guarda algo")
+              lat: e.lat, lng: e.lng
+            }) <= 1000 && this.comprobarMatch(p.lat, p.lng, e.lat, e.lng)) {
               this.saveMatch(p.id, e.id);
             }
           }
@@ -90,7 +90,7 @@ export class MatchComponent implements OnInit {
     });
   }
 
-  comprobarMatch(latp: number, lngp: number, late:number, lnge:number) {
+  comprobarMatch(latp: number, lngp: number, late: number, lnge: number) {
     let correcto: boolean = true;
     let perdido: PerdidosInterface;
     let encontrado: EncontradosInterface;
@@ -127,7 +127,7 @@ export class MatchComponent implements OnInit {
     return correcto;
   }
 
-  findPerdido(id?: string): PerdidosInterface | null{
+  findPerdido(id?: string): PerdidosInterface | null {
     let perdido: PerdidosInterface;
     for (let p of this.perdidos) {
       if (p.id == id) {
@@ -138,7 +138,7 @@ export class MatchComponent implements OnInit {
     return null;
   }
 
-  findEncontrado(id?: string): EncontradosInterface | null{
+  findEncontrado(id?: string): EncontradosInterface | null {
     let encontrado: EncontradosInterface;
     for (let p of this.encontrados) {
       if (p.id == id) {
@@ -147,5 +147,58 @@ export class MatchComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  deleteMatch(id?: string, perdido?: string, encontrado?: string): void {
+    if (id) {
+      if (this.perdidoIsUsed(id, perdido))
+        this.deletePerdido(perdido);
+      if (this.encontradoIsUsed(id, encontrado))
+        this.deleteEncontrado(encontrado)
+      this.matchService.delete(id)
+        .then(() => {
+          this.getAllMatches();
+          this.getAllPerdidos();
+          this.getAllEncontrados();
+          alert('The match was resolved successfully!')
+        })
+        .catch(err => console.log(err));
+    }
+  }
+
+  deletePerdido(id?: string): void {
+    if (id) {
+      this.perdidoService.delete(id)
+        .then(() => {
+        })
+        .catch(err => console.log(err));
+    }
+  }
+
+  deleteEncontrado(id?: string): void {
+    if (id) {
+      this.encontradoService.delete(id)
+        .then(() => {
+        })
+        .catch(err => console.log(err));
+    }
+  }
+
+  perdidoIsUsed(id: string, idP?: string): boolean {
+    let correcto = true
+    for (let mat of this.matches) {
+      if (mat.id != id && mat.perdido == idP)
+        correcto = false;
+    }
+    return correcto;
+  }
+
+  encontradoIsUsed(id: string, idE?: string): boolean {
+    let correcto = true
+    for (let mat of this.matches) {
+      if (mat.id != id && mat.encontrado == idE)
+        correcto = false;
+    }
+    return correcto;
   }
 }
