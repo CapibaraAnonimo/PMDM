@@ -71,9 +71,6 @@ export class MatchComponent implements OnInit {
       if (p.lat != undefined && p.lng != undefined) {
         for (let e of this.encontrados) {
           if (e.lat != undefined && e.lng != undefined && p.id != undefined && e.id != undefined) {
-            alert(google.maps.geometry.spherical.computeDistanceBetween({lat: p.lat, lng: p.lng}, {
-              lat: e.lat, lng: e.lng}));
-            alert(this.comprobarMatch(p.lat, p.lng, e.lat, e.lng))
             if (google.maps.geometry.spherical.computeDistanceBetween({lat: p.lat, lng: p.lng}, {
               lat: e.lat, lng: e.lng}) <= 1000 && this.comprobarMatch(p.lat, p.lng, e.lat, e.lng)) {
               alert("Se guarda algo")
@@ -87,34 +84,40 @@ export class MatchComponent implements OnInit {
 
   saveMatch(perdido: string, encontrado: string): void {
     this.match = new AddMatchDto(perdido, encontrado);
-    this.perdidoService.create(this.match).then(() => {
-      alert('Created new lost object successfully!');
+    this.matchService.create(this.match).then(() => {
+      alert('Created new match object successfully!');
       this.getAllMatches();
     });
   }
 
-  comprobarMatch(latp: number, lngp: number, late:number, lnge:number) {//TODO esto no funciona por algún motivo
-    let correcto: boolean = false;
+  comprobarMatch(latp: number, lngp: number, late:number, lnge:number) {
+    let correcto: boolean = true;
     let perdido: PerdidosInterface;
     let encontrado: EncontradosInterface;
+    if (this.matches.length == 0)
+      correcto = true;
     for (let mat of this.matches) {
+
       for (let per of this.perdidos) {
-        if (per.id == mat.id) {
+        if (per.id == mat.perdido) {
           perdido = per;
           if (perdido.lat != undefined && perdido.lng != undefined) {
             if (perdido.lat == latp && perdido.lng == lngp) {
-              correcto = true;
+              correcto = false;
             }
           }
           break;
         }
       }
+
       if (correcto) {
         for (let enc of this.encontrados) {
-          if (enc.id == mat.id) {
+          if (enc.id == mat.encontrado) {
             encontrado = enc;
             if (encontrado.lat != undefined && encontrado.lng != undefined) {
-              correcto = encontrado.lat == late && encontrado.lng == lnge;
+              if (encontrado.lat == late && encontrado.lng == lnge) {
+                correcto = false;
+              }
             }
             break;
           }
@@ -122,5 +125,27 @@ export class MatchComponent implements OnInit {
       }
     }
     return correcto;
+  }
+
+  findPerdido(id?: string): PerdidosInterface | null{
+    let perdido: PerdidosInterface;
+    for (let p of this.perdidos) {
+      if (p.id == id) {
+        perdido = p;
+        return perdido
+      }
+    }
+    return null;
+  }
+
+  findEncontrado(id?: string): EncontradosInterface | null{
+    let encontrado: EncontradosInterface;
+    for (let p of this.encontrados) {
+      if (p.id == id) {
+        encontrado = p;
+        return encontrado
+      }
+    }
+    return null;
   }
 }
