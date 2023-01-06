@@ -73,7 +73,7 @@ export class MatchComponent implements OnInit {
           if (e.lat != undefined && e.lng != undefined && p.id != undefined && e.id != undefined) {
             if (google.maps.geometry.spherical.computeDistanceBetween({lat: p.lat, lng: p.lng}, {
               lat: e.lat, lng: e.lng
-            }) <= 1000 && this.comprobarMatch(p.lat, p.lng, e.lat, e.lng)) {
+            }) <= 1000 && this.comprobarMatch(p.lat, p.lng, e.lat, e.lng) && e.categoria == p.categoria) {
               this.saveMatch(p.id, e.id);
             }
           }

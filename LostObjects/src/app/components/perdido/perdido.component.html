@@ -5,20 +5,36 @@
   </google-map>
   <label>Name:</label>
   <input type="text" [(ngModel)]="nombre" name="nombre"> <br>
-  <button (click)="savePerdido()">Save</button>
+  <label for="category">Elige una categoría:</label><br>
+  <select [(ngModel)]="categoria" name="category" id="category">
+    <option value="Gofre">Gofre</option>
+    <option value="Cafe">Cafe</option>
+    <option value="Magdalena">Magdalena</option>
+    <option value="Magdalena">Magdalena</option>
+    <option value="Gominolas">Gominolas</option>
+    <option value="Magdalena">Magdalena</option>
+    <option value="Otro">Otro</option>
+  </select> <br>
+  <button (click)="savePerdido()">Save</button> <br>
 
-  perdidos
-  <div *ngFor="let per of perdidos">
-    {{per.id}}
-    {{per.usuario}}
-    {{per.lat}}
-    {{per.lng}}
+  <div *ngIf="perdidos.length != 0">
+    perdidos
+    <div *ngFor="let per of perdidos">
+      {{per.id}}
+      {{per.usuario}}
+      {{per.lat}}
+      {{per.lng}}
+      {{per.categoria}}
+    </div>
   </div>
-  encontrados
-  <div *ngFor="let per of encontrados">
-    {{per.id}}
-    {{per.usuario}}
-    {{per.lat}}
-    {{per.lng}}
+  <div *ngIf="encontrados.length != 0">
+    encontrados
+    <div *ngFor="let enc of encontrados">
+      {{enc.id}}
+      {{enc.usuario}}
+      {{enc.lat}}
+      {{enc.lng}}
+      {{enc.categoria}}
+    </div>
   </div>
 </div>

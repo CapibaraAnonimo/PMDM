@@ -3,4 +3,5 @@ export interface EncontradosInterface {
   usuario?: string;
   lat?: number;
   lng?: number;
+  categoria?: string;
 }

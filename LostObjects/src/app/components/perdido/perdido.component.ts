@@ -24,6 +24,7 @@ export class PerdidoComponent implements OnInit {
   perdido!: AddPerdidoDto;
   submitted = false;
   nombre: string = '';
+  categoria: string = 'Gofre';
 
   constructor(private perdidoService: PerdidosService, private httpClient: HttpClient,
               private encontradoService: EncontradosService) {
@@ -42,7 +43,7 @@ export class PerdidoComponent implements OnInit {
 
   savePerdido(): void {
     if (this.nombre != '' && this.nombre != null) {
-      this.perdido = new AddPerdidoDto(this.nombre, this.coor.lat, this.coor.lng)
+      this.perdido = new AddPerdidoDto(this.nombre, this.coor.lat, this.coor.lng, this.categoria)
       this.perdidoService.create(this.perdido).then(() => {
         alert('Created new lost object successfully!');
         this.submitted = true;

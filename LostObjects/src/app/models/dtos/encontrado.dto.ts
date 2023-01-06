@@ -5,10 +5,12 @@ export class AddEncontradoDto implements EncontradosInterface{
   usuario?: string;
   lat?: number;
   lng?: number;
+  categoria?: string;
 
-  constructor(usuario: string, lat: number, lng: number) {
+  constructor(usuario: string, lat: number, lng: number, categoria: string) {
     this.usuario = usuario;
     this.lat = lat;
     this.lng = lng;
+    this.categoria = categoria;
   }
 }
